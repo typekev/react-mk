@@ -54,8 +54,18 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv environment variables files
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production
 
 # next.js build output
 .next
+
+# production
+/build
+
+# misc
+.DS_Store
