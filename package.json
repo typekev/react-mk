@@ -1,17 +1,17 @@
 {
   "name": "react-mk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A tiny react component which mimics typing",
   "main": "build/index.js",
   "exports": {
-    "./": "./build/"
+    "./": "./lib/"
   },
   "files": [
-    "build"
+    "lib"
   ],
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir build --copy-files"
+    "build": "babel src --out-dir lib --copy-files"
   },
   "repository": {
     "type": "git",
