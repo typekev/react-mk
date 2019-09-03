@@ -1,10 +1,10 @@
 {
   "name": "react-mk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A tiny react component which mimics typing",
   "main": "build/index.js",
   "exports": {
-    "./": "./lib/"
+    "./lib/": "./"
   },
   "files": [
     "lib"
