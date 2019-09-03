@@ -1,0 +1,117 @@
+{
+  "name": "react-mk",
+  "version": "0.0.1",
+  "description": "A tiny react component which mimics typing",
+  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir build --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typekev/react-mk.git"
+  },
+  "keywords": [
+    "react-hooks"
+  ],
+  "author": "Kevin Gonzalez <kev@typekev.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/typekev/react-mk/issues"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test -- --coverage --watchAll=false"
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true,
+      "jest": true,
+      "browser": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": [
+      "airbnb",
+      "prettier",
+      "prettier/react"
+    ],
+    "rules": {
+      "max-len": [
+        "error",
+        {
+          "code": 100
+        }
+      ],
+      "prefer-promise-reject-errors": [
+        "off"
+      ],
+      "react/jsx-filename-extension": [
+        "off"
+      ],
+      "react/prop-types": [
+        "warn"
+      ],
+      "no-return-assign": [
+        "off"
+      ]
+    }
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react-typewriter-hook": "^1.0.1",
+    "react": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "husky": "^3.0.4",
+    "jest": "^24.9.0",
+    "jest-canvas-mock": "^2.1.1",
+    "jest-css-modules": "^2.1.0",
+    "jest-styled-components": "^6.3.3",
+    "lint-staged": "^9.2.3",
+    "prettier": "^1.18.2",
+    "prettier-eslint-cli": "^5.0.0",
+    "react-dom": "^16.9.0"
+  }
+}
