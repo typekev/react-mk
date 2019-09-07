@@ -1,5 +1,7 @@
-export const addActionDelay = (accumulatedDelay, action) => accumulatedDelay + action[1];
+import getKeyPressDelay from './getKeyPressDelay';
+import { defaultKeyPressDelay } from './constants';
 
-const getDelay = accumulatedActions => accumulatedActions.reduce(addActionDelay, 0);
+const getDelay = (action, delayRange = defaultKeyPressDelay) =>
+  typeof action === 'number' ? action : action.length * getKeyPressDelay(...delayRange);
 
 export default getDelay;
