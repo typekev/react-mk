@@ -1,40 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import useTypewriter from 'react-typewriter-hook';
-import getTimers from './getTimers';
+import getTimer from './getTimer';
+import useKeyboard from './useKeyboard';
 import styles from './cursor.module.css';
+import { defaultKeyPressDelay } from './constants';
 
-export default function Keyboard({ children, cursor }) {
-  const [text, setText] = useState('');
+const initialState = [];
 
-  // eslint-disable-next-line consistent-return
+export const type = (...actions) => [...actions];
+
+export default function Keyboard({ children, cursor, actionDelay }) {
+  const [text, setText, clearText] = useKeyboard();
+  const [remainingActions, setRemainingActions] = useState(initialState);
+
+  useEffect(
+    /* istanbul ignore next */
+    () => {
+      if (remainingActions.length === initialState.length) {
+        if (typeof children === 'function') {
+          setRemainingActions(children({ type }));
+        } else {
+          clearText().then(() => setText(children.toString()));
+        }
+      }
+    },
+    [children, cursor],
+  );
+
   useEffect(() => {
-    if (typeof children === 'string') {
-      setText(children);
-    }
+    if (remainingActions.length > initialState.length) {
+      const [newAction, ...newRemainingActions] = remainingActions;
 
-    if (typeof children === 'function') {
-      const type = (...actions) => [...actions];
-      const actions = children({ type });
-      const timers = getTimers(actions, setText);
-      return () => timers.forEach(timer => clearTimeout(timer[0]));
+      const doAction =
+        /* istanbul ignore next */
+        action =>
+          setText(action).then(
+            /* istanbul ignore next */
+            () => setRemainingActions(newRemainingActions),
+          );
+      const doClear =
+        /* istanbul ignore next */
+        action => clearText(action).then(doAction);
+      getTimer(newAction, actionDelay).then(doClear);
     }
-  }, [children]);
+  }, [remainingActions]);
 
-  const typing = (
+  return (
     <>
-      {useTypewriter(text)}
+      {text}
       <span className={styles.cursor}>{cursor}</span>
     </>
   );
-  return typing;
 }
 
 Keyboard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]).isRequired,
   cursor: PropTypes.node,
+  actionDelay: PropTypes.arrayOf(PropTypes.number),
 };
 
 Keyboard.defaultProps = {
   cursor: '|',
+  actionDelay: defaultKeyPressDelay.map(delay => delay * 1.25),
 };

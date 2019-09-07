@@ -81,7 +81,6 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react-typewriter-hook": "^1.0.1",
     "react": "^16.9.0"
   },
   "devDependencies": {
