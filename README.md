@@ -36,7 +36,6 @@ function TypingComponent() {
       >
         Wow! Thats great!
       </Keyboard>
-      
       // Keyboard exposes a `type` function 
       // `type` expects one or more arguments
       <Keyboard>
@@ -47,9 +46,9 @@ function TypingComponent() {
             1000,
             // If the argument is a string
             // it will be typed out organically
-            'Welcome, visitor',
-            "I'm Kevin's autonomous assistant",
-            'What can I help you with?',
+            'This works too!',
+            300,
+            'And this!',
           )
         }
       </Keyboard>
