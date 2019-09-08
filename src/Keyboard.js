@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
@@ -9,13 +9,7 @@ const initialState = [];
 
 export const type = (...actions) => [...actions];
 
-export default function Keyboard({
-  children,
-  cursor,
-  cursorProps: { blink },
-  sentenceDelayPerCharRange,
-  keyPressDelayRange,
-}) {
+export default function Keyboard({ children, sentenceDelayPerCharRange, keyPressDelayRange }) {
   const [text, setText, clearText] = useKeyboard();
   const [remainingActions, setRemainingActions] = useState(initialState);
 
@@ -28,7 +22,7 @@ export default function Keyboard({
         );
       }
     },
-    [children, cursor],
+    [children],
   );
 
   useEffect(() => {
@@ -49,25 +43,16 @@ export default function Keyboard({
     }
   }, [remainingActions]);
 
-  return (
-    <>
-      {text}
-      <span styleName={blink ? 'cursor' : ''}>{cursor}</span>
-    </>
-  );
+  return text;
 }
 
 Keyboard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]).isRequired,
-  cursor: PropTypes.node,
   keyPressDelayRange: PropTypes.arrayOf(PropTypes.number),
   sentenceDelayPerCharRange: PropTypes.arrayOf(PropTypes.number),
-  cursorProps: PropTypes.shape({ blink: PropTypes.bool }),
 };
 
 Keyboard.defaultProps = {
-  cursor: '|',
   keyPressDelayRange: defaultKeyPressDelay,
   sentenceDelayPerCharRange: defaultKeyPressDelay.map(delay => delay * 1.25),
-  cursorProps: { blink: true },
 };
