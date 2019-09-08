@@ -1,6 +1,6 @@
 # react-mk | React Mechanical Keyboard ⌨️
 
-> A tiny react component which mimics typing
+> A tiny (5KB!) react component which mimics typing
 
 ## Install
 
@@ -15,29 +15,39 @@ View example at [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 ## Instructions
 
 - Import `Keyboard` from `react-mk`
-- `Keyboard` accepts a child that is a type of `function` or has a valid `toString` method
-- `Keyboard` will type out your text in an organic manner
+- `Keyboard` accepts any child with a valid `toString` method
+- `Keyboard` exposes a `type` method when `children` is a type of `function`
+- `Keyboard` will type out your text in an organic manner, see [example](#example)
+- Besides `children`, `Keyboard` can take the following optional props
+
+  - `sentenceDelayPerCharRange`: an array of two numbers indicating the delay in milliseconds which `react-mk` applies between words, the delay is calculated by getting a random number in your range and multiplying it by the number of characters in your sentence.
+  - `keyPressDelayRange`: an array of two numbers indicating the delay in milliseconds which `react-mk` applies between characters, the delay is calculated by getting a random number in your range.
+
+- You may also import the `Cursor` component from `react-mk`; a standard blinking cursor that accepts the following props
+
+  - `children`: the cursor you wish to display, it will accept any `node` and is a `|` by default
+  - `blink`: a bool which is `true` by default, when `false` the cursor will not blink
+  - All other props will be spread to the root element which is a `span`
 
 ## Usage
 
 ```js
 import React from 'react';
-import Keyboard from 'components/react-mk';
+import Keyboard, { Cursor } from 'components/react-mk';
 
 function TypingComponent() {
   return (
     <>
       // You may pass a string as a child to Keyboard 
-      // Any child that is not a function will have
-      // its `toString` method called
-      <Keyboard
-        // You may pass a unique cursor to `Keyboard`
-        cursor="[]"
-      >
-        Wow! Thats great!
-      </Keyboard>
-      // Keyboard exposes a `type` function 
-      // `type` expects one or more arguments
+      // Any child that is not a function will have it's `toString` method called
+      <Keyboard>Wow! Thats great!</Keyboard>
+      
+      // You may render a blinking `Cursor`
+      <Cursor />
+      
+      <br />
+      
+      // Keyboard exposes a `type` function, which expects one or more arguments
       <Keyboard>
         {({ type }) =>
           type(
@@ -52,6 +62,9 @@ function TypingComponent() {
           )
         }
       </Keyboard>
+      // You may disable the blinking animation
+      // And you may render any `Cursor` that you like by passing a `node` as `children`
+      <Cursor blink={false}>#</Cursor>
     </>
   );
 }
