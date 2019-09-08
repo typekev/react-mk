@@ -1,7 +1,7 @@
 {
   "name": "react-mk",
   "version": "0.0.11",
-  "description": "A tiny react component which mimics typing",
+  "description": "A tiny (5KB!) react component which mimics typing",
   "main": "lib/index.js",
   "exports": {
     "./": "./lib/"
@@ -103,8 +103,9 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.6.0",
     "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/runtime": "^7.6.0",
+    "babel-plugin-react-css-modules": "^5.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.9.0"
   },
