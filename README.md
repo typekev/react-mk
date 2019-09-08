@@ -1,6 +1,6 @@
 # react-mk | React Mechanical Keyboard ⌨️
 
-> A tiny (5KB!) react component which mimics typing
+> A tiny (4KB!) react component which mimics typing
 
 ## Install
 
