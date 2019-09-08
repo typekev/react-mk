@@ -1,6 +1,6 @@
 {
   "name": "react-mk",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A tiny (5KB!) react component which mimics typing",
   "main": "lib/index.js",
   "exports": {
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir lib --copy-files && npx postcss ./src/*.css --use autoprefixer -d lib/"
+    "build": "babel src --out-dir lib --copy-files --presets minify && npx postcss ./src/*.css --use autoprefixer -d lib/"
   },
   "repository": {
     "type": "git",
