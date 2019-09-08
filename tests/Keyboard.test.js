@@ -18,6 +18,17 @@ describe('Keyboard component', () => {
     expect(wrapper.prop('children')).toBe(text);
   });
 
+  it('renders a child with the value Test with blink disabled', async () => {
+    let wrapper;
+    const text = 'Test';
+
+    await act(async () => {
+      wrapper = mount(<Keyboard cursorProps={{ blink: false }}>{text}</Keyboard>);
+    });
+
+    expect(wrapper.prop('children')).toBe(text);
+  });
+
   it('renders a child with the value Test', async () => {
     let wrapper;
     const text = 'Test';

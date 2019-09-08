@@ -13,19 +13,18 @@ export default function useKeyboard() {
   const [chars, setChars] = useState(initialState);
   const [remainingChars, setRemainingChars] = useState(initialState);
   const [resolver, setResolver] = useState(undefined);
+  const [delayRange, setDelayRange] = useState(undefined);
 
   const charsRef = useRef(chars);
   charsRef.current = chars;
 
   useEffect(() => {
-    /* istanbul ignore else */
+    /* istanbul ignore next */
     if (remainingChars.length > initialState.length) {
       const [nextChar, ...newRemainingChars] = remainingChars;
-      /* istanbul ignore next */
       const doType = () => type(chars, nextChar, setChars);
-      /* istanbul ignore next */
       const doSetRemainingChars = () => setRemainingChars(newRemainingChars);
-      getTimer(nextChar)
+      getTimer(nextChar, delayRange)
         .then(doType)
         .then(doSetRemainingChars);
     } else if (typeof resolver === 'function') {
@@ -35,9 +34,10 @@ export default function useKeyboard() {
     }
   }, [remainingChars]);
 
-  const setText = text =>
+  const setText = (text, keyPressDelayRange) =>
     new Promise(resolve => {
       setResolver(() => resolve);
+      setDelayRange(keyPressDelayRange);
       setChars(initialState);
       /* istanbul ignore else */
       if (typeof text === 'string') {
