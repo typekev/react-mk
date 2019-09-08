@@ -13,7 +13,7 @@ export default function Keyboard({
   children,
   cursor,
   cursorProps: { blink },
-  sentenceDelayRange,
+  sentenceDelayPerCharRange,
   keyPressDelayRange,
 }) {
   const [text, setText, clearText] = useKeyboard();
@@ -45,7 +45,7 @@ export default function Keyboard({
       const doClear =
         /* istanbul ignore next */
         action => clearText(action).then(doAction);
-      getTimer(newAction, sentenceDelayRange).then(doClear);
+      getTimer(newAction, sentenceDelayPerCharRange).then(doClear);
     }
   }, [remainingActions]);
 
@@ -61,13 +61,13 @@ Keyboard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]).isRequired,
   cursor: PropTypes.node,
   keyPressDelayRange: PropTypes.arrayOf(PropTypes.number),
-  sentenceDelayRange: PropTypes.arrayOf(PropTypes.number),
+  sentenceDelayPerCharRange: PropTypes.arrayOf(PropTypes.number),
   cursorProps: PropTypes.shape({ blink: PropTypes.bool }),
 };
 
 Keyboard.defaultProps = {
   cursor: '|',
   keyPressDelayRange: defaultKeyPressDelay,
-  sentenceDelayRange: defaultKeyPressDelay.map(delay => delay * 1.25),
+  sentenceDelayPerCharRange: defaultKeyPressDelay.map(delay => delay * 1.25),
   cursorProps: { blink: true },
 };
