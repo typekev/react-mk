@@ -1,7 +1,7 @@
 {
   "name": "react-mk",
   "version": "0.0.14",
-  "description": "A tiny (6KB!) react component which mimics typing",
+  "description": "A tiny (5KB!) react component which mimics typing",
   "main": "lib/index.js",
   "exports": {
     "./": "./lib/"
@@ -117,6 +117,7 @@
     "@testing-library/react": "^9.1.4",
     "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.3",
+    "babel-preset-minify": "^0.5.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.3.0",
