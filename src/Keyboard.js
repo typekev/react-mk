@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
 import { defaultKeyPressDelay } from './constants';
-import './cursor.module.css';
 
 const initialState = [];
 
