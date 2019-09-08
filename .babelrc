@@ -11,5 +11,17 @@
         "useESModules": false
       }
     ]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "babel-plugin-react-css-modules",
+          {
+            "generateScopedName": "[local]"
+          }
+        ]
+      ]
+    }
+  }
 }
