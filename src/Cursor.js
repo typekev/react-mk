@@ -24,7 +24,7 @@ export default function Cursor({ blink, blinkAnimationDuration, children, ...res
             }
           }
           span {
-            ${blink ? `animation: cursor-blink ${blinkAnimationDuration}ms infinite;` : ''}
+            animation: cursor-blink ${blinkAnimationDuration}ms ${blink ? 'infinite' : 0};
           }
         `}
       </style>
