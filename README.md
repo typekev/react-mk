@@ -27,6 +27,7 @@ View example at [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 
   - `children`: the cursor you wish to display, it will accept any `node` and is a `|` by default
   - `blink`: a bool which is `true` by default, when `false` the cursor will not blink
+  - `blinkAnimationDuration`: the `animation-duration` of the `css` `animation` property of the cursor
   - All other props will be spread to the root element which is a `span`
 
 ## Usage
