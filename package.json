@@ -1,6 +1,6 @@
 {
   "name": "react-mk",
-  "version": "0.0.18",
+  "version": "1.0.0",
   "description": "A tiny (5KB!) react component which mimics typing",
   "main": "lib/index.js",
   "exports": {
