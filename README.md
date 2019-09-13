@@ -1,5 +1,4 @@
-# [React Mechanical Keyboard ⌨️](https://github.com/typekev/react-mk) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/typekev/react-mk/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react-mk) [![Build Status](https://travis-ci.org/typekev/react-mk.svg?branch=master)](https://travis-ci.org/typekev/react-mk) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls)
-
+# [React Mechanical Keyboard](https://github.com/typekev/react-mk) ⌨️ [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/typekev/react-mk/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react-mk) [![Build Status](https://travis-ci.org/typekev/react-mk.svg?branch=master)](https://travis-ci.org/typekev/react-mk) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls)
 
 > A tiny (4KB!) react component which mimics typing
 
@@ -40,15 +39,12 @@ import Keyboard, { Cursor } from 'components/react-mk';
 function TypingComponent() {
   return (
     <>
-      // You may pass a string as a child to Keyboard 
-      // Any child that is not a function will have it's `toString` method called
+      // You may pass a string as a child to Keyboard // Any child that is not a function will have
+      it's `toString` method called
       <Keyboard>Wow! Thats great!</Keyboard>
-      
       // You may render a blinking `Cursor`
       <Cursor />
-      
       <br />
-      
       // Keyboard exposes a `type` function, which expects one or more arguments
       <Keyboard>
         {({ type }) =>
@@ -64,8 +60,8 @@ function TypingComponent() {
           )
         }
       </Keyboard>
-      // You may disable the blinking animation
-      // And you may render any `Cursor` that you like by passing a `node` as `children`
+      // You may disable the blinking animation // And you may render any `Cursor` that you like by passing
+      a `node` as `children`
       <Cursor blink={false}>#</Cursor>
     </>
   );
