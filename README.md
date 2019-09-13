@@ -1,4 +1,4 @@
-# [React Mechanical Keyboard](https://github.com/typekev/react-mk) ⌨️ [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/typekev/react-mk/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/react-mk)](https://www.npmjs.com/package/react-mk) [![Build Status](https://travis-ci.org/typekev/react-mk.svg?branch=master)](https://travis-ci.org/typekev/react-mk) [![Coverage Status](https://coveralls.io/repos/github/typekev/react-mk/badge.svg?branch=master)](https://coveralls.io/github/typekev/react-mk?branch=master) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls)
+# [React Mechanical Keyboard](https://github.com/typekev/react-mk) ⌨️ [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/typekev/react-mk/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/react-mk)](https://www.npmjs.com/package/react-mk) [![Build Status](https://travis-ci.org/typekev/react-mk.svg?branch=master)](https://travis-ci.org/typekev/react-mk) [![Coverage Status](https://coveralls.io/repos/github/typekev/react-mk/badge.svg?branch=master)](https://coveralls.io/github/typekev/react-mk?branch=master)
 
 > A tiny (4KB!) react component which mimics typing
 
@@ -68,7 +68,7 @@ function TypingComponent() {
 }
 ```
 
-## Todo
+## Todo &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls)
 
 - Improve test coverage and quality
 - Consider allowing typing of non-strings
