@@ -1,4 +1,5 @@
-# react-mk | React Mechanical Keyboard ⌨️
+# [React Mechanical Keyboard ⌨️](https://github.com/typekev/react-mk) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/typekev/react-mk/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react-mk) [![Build Status](https://travis-ci.org/typekev/react-mk.svg?branch=master)](https://travis-ci.org/typekev/react-mk) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls)
+
 
 > A tiny (4KB!) react component which mimics typing
 
