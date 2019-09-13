@@ -32,6 +32,8 @@ View example at [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 
 ## Usage
 
+See 
+
 ```js
 import React from 'react';
 import Keyboard, { Cursor } from 'components/react-mk';
@@ -39,30 +41,46 @@ import Keyboard, { Cursor } from 'components/react-mk';
 function TypingComponent() {
   return (
     <>
-      // You may pass a string as a child to Keyboard // Any child that is not a function will have
-      it's `toString` method called
-      <Keyboard>Wow! Thats great!</Keyboard>
-      // You may render a blinking `Cursor`
+      <Keyboard sentenceDelayPerCharRange={[0, 0]}>
+        You can write whatever you like here
+      </Keyboard>
       <Cursor />
       <br />
-      // Keyboard exposes a `type` function, which expects one or more arguments
-      <Keyboard>
+      <Keyboard keyPressDelayRange={[200, 400]}>
         {({ type }) =>
           type(
-            // If the argument is a number
-            // it will be used as a delay in ms
             1000,
-            // If the argument is a string
-            // it will be typed out organically
-            'This works too!',
+            "You can even type super slowly using the keyPressDelayRange prop",
             300,
-            'And this!',
+            "Set the blink property of Cursor to false to disable the blinking animation --> "
           )
         }
       </Keyboard>
-      // You may disable the blinking animation // And you may render any `Cursor` that you like by passing
-      a `node` as `children`
-      <Cursor blink={false}>#</Cursor>
+      <Cursor blink={false} />
+      <br />
+      <Keyboard
+        sentenceDelayPerCharRange={[0, 0]}
+        keyPressDelayRange={[50, 70]}
+      >
+        {({ type }) =>
+          type(
+            3000,
+            "Multiple instances of Keyboard can easily be rendered at the same time"
+          )
+        }
+      </Keyboard>
+      <Cursor>#</Cursor>
+      <br />
+      <Keyboard sentenceDelayPerCharRange={[300, 400]}>
+        {({ type }) =>
+          type(
+            4000,
+            "Use the sentenceDelayPerCharRange prop to adjust the amount of time that your sentences should be visible (It'll be a while before the next sentance appears)",
+            "You can also pass a number to the `type` function to dictate the time between deleting the previous sentance and writting the next sentence"
+          )
+        }
+      </Keyboard>
+      <Cursor blinkAnimationDuration={200}>[]</Cursor>
     </>
   );
 }
