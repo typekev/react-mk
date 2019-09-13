@@ -32,8 +32,6 @@ View example at [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 
 ## Usage
 
-See 
-
 ```js
 import React from 'react';
 import Keyboard, { Cursor } from 'components/react-mk';
@@ -41,32 +39,24 @@ import Keyboard, { Cursor } from 'components/react-mk';
 function TypingComponent() {
   return (
     <>
-      <Keyboard sentenceDelayPerCharRange={[0, 0]}>
-        You can write whatever you like here
-      </Keyboard>
+      <Keyboard sentenceDelayPerCharRange={[0, 0]}>You can write whatever you like here</Keyboard>
       <Cursor />
       <br />
       <Keyboard keyPressDelayRange={[200, 400]}>
         {({ type }) =>
           type(
             1000,
-            "You can even type super slowly using the keyPressDelayRange prop",
+            'You can even type super slowly using the keyPressDelayRange prop',
             300,
-            "Set the blink property of Cursor to false to disable the blinking animation --> "
+            'Set the blink property of Cursor to false to disable the blinking animation --> ',
           )
         }
       </Keyboard>
       <Cursor blink={false} />
       <br />
-      <Keyboard
-        sentenceDelayPerCharRange={[0, 0]}
-        keyPressDelayRange={[50, 70]}
-      >
+      <Keyboard sentenceDelayPerCharRange={[0, 0]} keyPressDelayRange={[50, 70]}>
         {({ type }) =>
-          type(
-            3000,
-            "Multiple instances of Keyboard can easily be rendered at the same time"
-          )
+          type(3000, 'Multiple instances of Keyboard can easily be rendered at the same time')
         }
       </Keyboard>
       <Cursor>#</Cursor>
@@ -76,7 +66,7 @@ function TypingComponent() {
           type(
             4000,
             "Use the sentenceDelayPerCharRange prop to adjust the amount of time that your sentences should be visible (It'll be a while before the next sentance appears)",
-            "You can also pass a number to the `type` function to dictate the time between deleting the previous sentance and writting the next sentence"
+            'You can also pass a number to the `type` function to dictate the time between deleting the previous sentance and writting the next sentence',
           )
         }
       </Keyboard>
