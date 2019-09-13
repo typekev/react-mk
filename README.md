@@ -68,7 +68,8 @@ function TypingComponent() {
 }
 ```
 
-# TODO &middot; [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls)
+# TODO &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls) [![Inline docs](http://inch-ci.org/github/typekev/react-mk.svg?branch=master)](http://inch-ci.org/github/typekev/react-mk) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 - Improve test coverage and quality
+- Improve documentation
 - Consider allowing typing of non-strings
