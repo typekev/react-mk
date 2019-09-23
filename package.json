@@ -1,7 +1,7 @@
 {
   "name": "react-mk",
-  "version": "1.0.1",
-  "description": "A tiny (5KB!) react component which mimics typing",
+  "version": "1.0.2",
+  "description": "A simple, light weight (5kB), and declarative React component for displaying typing animations, painlessly.",
   "main": "lib/index.js",
   "exports": {
     "./": "./lib/"
