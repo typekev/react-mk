@@ -40,7 +40,7 @@ export default function useKeyboard() {
       setDelayRange(keyPressDelayRange);
       setChars(initialState);
       /* istanbul ignore else */
-      if (typeof text === 'string') {
+      if (typeof text === 'string' && text.length > 0) {
         setRemainingChars(text);
       } else {
         resolve();
