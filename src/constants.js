@@ -1,3 +1,4 @@
-export const defaultKeyPressDelay = [72, 144];
+export const defaultKeyPressDelay = [100, 150];
+export const defaultSentenceDelay = [125.8, 219.4];
 
-export default { defaultKeyPressDelay };
+export default { defaultKeyPressDelay, defaultSentenceDelay };
