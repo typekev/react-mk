@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
-import { defaultKeyPressDelay } from './constants';
+import { defaultKeyPressDelay, defaultSentenceDelay } from './constants';
 
 const initialState = [];
 
@@ -11,6 +11,7 @@ export const type = (...actions) => [...actions];
 export default function Keyboard({ children, sentenceDelayPerCharRange, keyPressDelayRange }) {
   const [text, setText, clearText] = useKeyboard();
   const [remainingActions, setRemainingActions] = useState(initialState);
+  const [previousAction, setPreviousAction] = useState('');
 
   useEffect(
     /* istanbul ignore next */
@@ -38,7 +39,8 @@ export default function Keyboard({ children, sentenceDelayPerCharRange, keyPress
       const doClear =
         /* istanbul ignore next */
         action => clearText(action).then(doAction);
-      getTimer(newAction, sentenceDelayPerCharRange).then(doClear);
+      getTimer(previousAction, sentenceDelayPerCharRange).then(doClear);
+      setPreviousAction(newAction);
     }
   }, [remainingActions]);
 
@@ -53,5 +55,5 @@ Keyboard.propTypes = {
 
 Keyboard.defaultProps = {
   keyPressDelayRange: defaultKeyPressDelay,
-  sentenceDelayPerCharRange: defaultKeyPressDelay.map(delay => delay * 1.25),
+  sentenceDelayPerCharRange: defaultSentenceDelay,
 };
