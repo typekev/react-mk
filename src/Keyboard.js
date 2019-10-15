@@ -29,17 +29,15 @@ export default function Keyboard({ children, sentenceDelayPerCharRange, keyPress
     if (remainingActions.length > initialState.length) {
       const [newAction, ...newRemainingActions] = remainingActions;
 
-      const doAction =
+      getTimer(previousAction, sentenceDelayPerCharRange).then(
         /* istanbul ignore next */
-        action =>
-          setText(action, keyPressDelayRange).then(
-            /* istanbul ignore next */
-            () => setRemainingActions(newRemainingActions),
-          );
-      const doClear =
-        /* istanbul ignore next */
-        action => clearText(action).then(doAction);
-      getTimer(previousAction, sentenceDelayPerCharRange).then(doClear);
+        () =>
+          clearText(newAction).then(action =>
+            setText(action, keyPressDelayRange).then(() =>
+              setRemainingActions(newRemainingActions),
+            ),
+          ),
+      );
       setPreviousAction(newAction);
     }
   }, [remainingActions]);
