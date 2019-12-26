@@ -49,6 +49,11 @@
   "bugs": {
     "url": "https://github.com/typekev/react-mk/issues"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./tests/setupTests.js"
+    ]
+  },
   "dependencies": {
     "@babel/runtime": "^7.6.0",
     "prop-types": "^15.7.2",
