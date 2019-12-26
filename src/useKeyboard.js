@@ -52,12 +52,16 @@ export default function useKeyboard() {
       /* istanbul ignore next */
       !chars
         ? resolve(action)
-        : getTimers(charsRef.current.split(''), () => {
-            /* istanbul ignore next */
-            backspace(charsRef.current, setChars);
-            /* istanbul ignore next */
-            return charsRef.current.length === 0 && resolve(action);
-          }),
+        : getTimers(
+            charsRef.current.split(''),
+            () => {
+              /* istanbul ignore next */
+              backspace(charsRef.current, setChars);
+              /* istanbul ignore next */
+              return charsRef.current.length === 0 && resolve(action);
+            },
+            delayRange,
+          ),
     );
 
   const text = chars;
