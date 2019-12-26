@@ -50,7 +50,7 @@
     "url": "https://github.com/typekev/react-mk/issues"
   },
   "jest": {
-    "setupFilesAfterEnv": [
+    "setupFiles": [
       "./tests/setupTests.js"
     ]
   },
