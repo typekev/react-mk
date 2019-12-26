@@ -16,6 +16,7 @@ describe('Keyboard component', () => {
     });
 
     expect(wrapper.prop('children')).toBe(text);
+    wrapper.unmount();
   });
 
   it('renders a child with the value Test', async () => {
@@ -29,9 +30,12 @@ describe('Keyboard component', () => {
     await act(async () => {
       setTimeout(() => expect(wrapper.prop('children')).toBe(text), 2000);
     });
+
+    wrapper.unmount();
   });
 
   it('renders a child with the value Test', async () => {
+    let wrapper;
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
     useStateSpy.mockImplementation(init => [init, setState]);
@@ -39,15 +43,18 @@ describe('Keyboard component', () => {
     const text = 'Test';
 
     await act(async () => {
-      mount(<Keyboard>{({ type }) => type(text, text, text)}</Keyboard>);
+      wrapper = mount(<Keyboard>{({ type }) => type(text, text, text)}</Keyboard>);
     });
 
     await act(async () => {
       setTimeout(() => expect(setState).toHaveBeenCalledWith(text), 2000);
     });
+
+    wrapper.unmount();
   });
 
   it('renders a an empty string', async () => {
+    let wrapper;
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
     useStateSpy.mockImplementation(init => [init, setState]);
@@ -55,12 +62,14 @@ describe('Keyboard component', () => {
     const text = '';
 
     await act(async () => {
-      mount(<Keyboard>{text}</Keyboard>);
+      wrapper = mount(<Keyboard>{text}</Keyboard>);
     });
 
     await act(async () => {
       setTimeout(() => expect(setState).toHaveBeenCalledWith(text), 2000);
     });
+
+    wrapper.unmount();
   });
 
   it('returns an array of length 4', () => {

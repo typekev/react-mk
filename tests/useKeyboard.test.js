@@ -23,6 +23,7 @@ describe('useKeyboard hook', () => {
     } = getProps(wrapper);
 
     expect(text).toBe('');
+    wrapper.unmount();
   });
 
   it('should set text to Test then clear it', async () => {
@@ -56,6 +57,8 @@ describe('useKeyboard hook', () => {
 
       setTimeout(() => expect(delayedText).toBe(''), 2000);
     });
+
+    wrapper.unmount();
   });
 
   it('returns undefined and does not throw when chars is greater than 1', () => {
