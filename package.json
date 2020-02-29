@@ -1,6 +1,6 @@
 {
   "name": "react-mk",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A simple, light weight (5kB), and declarative React component for displaying typing animations, painlessly.",
   "main": "lib/index.js",
   "exports": {
