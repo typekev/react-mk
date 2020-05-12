@@ -1,14 +1,26 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
 import { defaultKeyPressDelay, defaultSentenceDelay } from './constants';
 
-const initialState = [];
+const initialState: string[] = [];
 
-export const type = (...actions) => [...actions];
+export const type = (...actions: (string | number)[]) => [...actions];
 
-export default function Keyboard({ children, sentenceDelayPerCharRange, keyPressDelayRange }) {
+interface Props {
+  children:
+    | string
+    | number
+    | (({ type }: { type: (...arg: (string | number)[]) => (string | number)[] }) => any);
+  keyPressDelayRange?: number[];
+  sentenceDelayPerCharRange?: number[];
+}
+
+export default function Keyboard({
+  children,
+  sentenceDelayPerCharRange = defaultSentenceDelay,
+  keyPressDelayRange = defaultKeyPressDelay,
+}: Props) {
   const [text, setText, clearText] = useKeyboard();
   const [remainingActions, setRemainingActions] = useState(initialState);
   const [previousAction, setPreviousAction] = useState('');
@@ -32,7 +44,7 @@ export default function Keyboard({ children, sentenceDelayPerCharRange, keyPress
       getTimer(previousAction, sentenceDelayPerCharRange).then(
         /* istanbul ignore next */
         () =>
-          clearText(newAction).then(action =>
+          clearText(newAction).then((action: string | number) =>
             setText(action, keyPressDelayRange).then(() =>
               setRemainingActions(newRemainingActions),
             ),
@@ -44,14 +56,3 @@ export default function Keyboard({ children, sentenceDelayPerCharRange, keyPress
 
   return text;
 }
-
-Keyboard.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.func]).isRequired,
-  keyPressDelayRange: PropTypes.arrayOf(PropTypes.number),
-  sentenceDelayPerCharRange: PropTypes.arrayOf(PropTypes.number),
-};
-
-Keyboard.defaultProps = {
-  keyPressDelayRange: defaultKeyPressDelay,
-  sentenceDelayPerCharRange: defaultSentenceDelay,
-};

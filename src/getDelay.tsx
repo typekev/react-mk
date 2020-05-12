@@ -1,6 +1,5 @@
-import getKeyPressDelay from './getKeyPressDelay';
-import { defaultKeyPressDelay } from './constants';
-
+import getKeyPressDelay from "./getKeyPressDelay";
+import { defaultKeyPressDelay } from "./constants";
 /**
  * Return a delay in milliseconds based on a given `action` and `delayRange`
  *
@@ -8,8 +7,8 @@ import { defaultKeyPressDelay } from './constants';
  * @param {number[]} delayRange An array of two numbers forming a range [min, max]
  * @returns {number}
  */
-
 const getDelay = (action, delayRange = defaultKeyPressDelay) =>
-  typeof action === 'number' ? action : action.length * getKeyPressDelay(...delayRange);
-
+  typeof action === "number"
+    ? action
+    : action.length * getKeyPressDelay(...delayRange);
 export default getDelay;

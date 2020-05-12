@@ -5,7 +5,6 @@
  * @param {number} max The largest possible value
  * @returns {number}
  */
-
-const getKeyPressDelay = (min, max) => Math.floor(Math.random() * (max - min) + min);
-
+const getKeyPressDelay = (min, max) =>
+  Math.floor(Math.random() * (max - min) + min);
 export default getKeyPressDelay;
