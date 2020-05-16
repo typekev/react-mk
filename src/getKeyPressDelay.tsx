@@ -1,10 +1,11 @@
 /**
- * Return a random number between `min` and `max`
+ * Returns a number between `min` and `max`.
  *
- * @param {number} min The smallest possible value
- * @param {number} max The largest possible value
- * @returns {number}
+ * @param min - The smallest possible output
+ * @param max - The largest possible output
+ * @returns A number in the range of `min` and `max`
  */
-const getKeyPressDelay = (min, max) =>
+const getKeyPressDelay = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min) + min);
+
 export default getKeyPressDelay;
