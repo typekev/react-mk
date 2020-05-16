@@ -1,7 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {PropsWithChildren, DetailedHTMLProps} from 'react';
 
-export default function Cursor({ blink, blinkAnimationDuration, children, ...rest }) {
+interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
+  blink: boolean;
+  blinkAnimationDuration: number,
+}
+
+export default function Cursor({ blink = true, blinkAnimationDuration = 700, children = '|', ...rest }: PropsWithChildren<Props>) {
   return (
     <>
       <span
@@ -32,14 +36,3 @@ export default function Cursor({ blink, blinkAnimationDuration, children, ...res
   );
 }
 
-Cursor.propTypes = {
-  children: PropTypes.node,
-  blink: PropTypes.bool,
-  blinkAnimationDuration: PropTypes.number,
-};
-
-Cursor.defaultProps = {
-  children: '|',
-  blink: true,
-  blinkAnimationDuration: 700,
-};
