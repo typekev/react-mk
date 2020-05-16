@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
+import { Action, Range } from '../types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
 import { defaultKeyPressDelay, defaultSentenceDelay } from './constants';
 
 const initialState: string[] = [];
 
-export const type = (...actions: (string | number)[]) => [...actions];
+export const type = (...actions: Action[]) => [...actions];
 
 interface Props {
-  children:
-    | string
-    | number
-    | (({ type }: { type: (...arg: (string | number)[]) => (string | number)[] }) => any);
-  keyPressDelayRange?: number[];
-  sentenceDelayPerCharRange?: number[];
+  children: string | number | (({ type }: { type: (...arg: Action[]) => Action[] }) => any);
+  keyPressDelayRange?: Range;
+  sentenceDelayPerCharRange?: Range;
 }
 
 export default function Keyboard({
@@ -44,7 +42,7 @@ export default function Keyboard({
       getTimer(previousAction, sentenceDelayPerCharRange).then(
         /* istanbul ignore next */
         () =>
-          clearText(newAction).then((action: string | number) =>
+          clearText(newAction).then((action: Action) =>
             setText(action, keyPressDelayRange).then(() =>
               setRemainingActions(newRemainingActions),
             ),
