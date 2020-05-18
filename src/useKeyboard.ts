@@ -67,7 +67,7 @@ const useKeyboard = () => {
         )
     );
 
-  const text = chars;
+  const text = chars.join('');
 
   return { text, setText, clearText };
 }
