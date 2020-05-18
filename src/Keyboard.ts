@@ -19,7 +19,7 @@ export default function Keyboard({
   sentenceDelayPerCharRange = defaultSentenceDelay,
   keyPressDelayRange = defaultKeyPressDelay,
 }: Props) {
-  const [text, setText, clearText] = useKeyboard();
+  const { text, setText, clearText } = useKeyboard();
   const [remainingActions, setRemainingActions] = useState(initialState);
   const [previousAction, setPreviousAction] = useState('');
 
@@ -42,10 +42,11 @@ export default function Keyboard({
       getTimer(previousAction, sentenceDelayPerCharRange).then(
         /* istanbul ignore next */
         () =>
-          clearText(newAction).then((action: Action) =>
+          clearText(newAction).then((action: Action) => {
             setText(action, keyPressDelayRange).then(() =>
               setRemainingActions(newRemainingActions),
-            ),
+            )
+          },
           ),
       );
       setPreviousAction(newAction);

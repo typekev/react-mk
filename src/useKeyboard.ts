@@ -1,18 +1,26 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
+import { Action, Range } from "../types";
 import getTimers from "./getTimers";
 import getTimer from "./getTimer";
-const initialState = "";
-export const backspace = (chars, setChars) =>
+import { defaultKeyPressDelay } from "./constants";
+
+const initialState = [""];
+
+export const backspace = (chars: string[], setChars: Dispatch<SetStateAction<string[]>>) =>
   setChars(chars.length > 1 ? chars.slice(0, chars.length - 1) : initialState);
-export const type = (chars, nextChar, setChars) =>
-  setChars(`${chars}${nextChar}`);
-export default function useKeyboard() {
-  const [chars, setChars] = useState(initialState);
-  const [remainingChars, setRemainingChars] = useState(initialState);
-  const [resolver, setResolver] = useState(undefined);
-  const [delayRange, setDelayRange] = useState(undefined);
+
+export const type = (chars: string[], nextChar: string, setChars: Dispatch<SetStateAction<string[]>>) =>
+  setChars([...chars, nextChar]);
+
+const useKeyboard = () => {
+  const [chars, setChars] = useState<string[]>(initialState);
+  const [remainingChars, setRemainingChars] = useState<string[]>(initialState);
+  const [resolver, setResolver] = useState<(() => void) | undefined>(undefined);
+  const [delayRange, setDelayRange] = useState(defaultKeyPressDelay);
   const charsRef = useRef(chars);
+
   charsRef.current = chars;
+
   useEffect(() => {
     /* istanbul ignore next */
     if (remainingChars.length > initialState.length) {
@@ -28,34 +36,40 @@ export default function useKeyboard() {
       setRemainingChars(initialState);
     }
   }, [remainingChars]);
-  const setText = (text, keyPressDelayRange) =>
+
+  const setText = (action: Action, keyPressDelayRange: Range) =>
     new Promise(resolve => {
       setResolver(() => resolve);
       setDelayRange(keyPressDelayRange);
       setChars(initialState);
       /* istanbul ignore else */
-      if (typeof text === "string" && text.length > 0) {
-        setRemainingChars(text);
+      if (typeof action === "string" && action.length > 0) {
+        setRemainingChars(action.split(''));
       } else {
         resolve();
       }
     });
-  const clearText = action =>
-    new Promise(resolve =>
+
+  const clearText = (action: Action) =>
+    new Promise<Action>(resolve =>
       /* istanbul ignore next */
       !chars
         ? resolve(action)
         : getTimers(
-            charsRef.current.split(""),
-            () => {
-              /* istanbul ignore next */
-              backspace(charsRef.current, setChars);
-              /* istanbul ignore next */
-              return charsRef.current.length === 0 && resolve(action);
-            },
-            delayRange
-          )
+          charsRef.current,
+          () => {
+            /* istanbul ignore next */
+            backspace(charsRef.current, setChars);
+            /* istanbul ignore next */
+            return charsRef.current.length === 0 && resolve(action);
+          },
+          delayRange
+        )
     );
+
   const text = chars;
-  return [text, setText, clearText];
+
+  return { text, setText, clearText };
 }
+
+export default useKeyboard

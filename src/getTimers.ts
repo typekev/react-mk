@@ -22,12 +22,12 @@ export const getDelays = (actions: Action[], delayRange: Range) =>
     [],
   );
 
-export const startTimers = (actions: Action[], then: () => Promise<void>) => (
+export const startTimers = (actions: Action[], then: () => void) => (
   delay: number,
   index: number,
 ) => getTimer(actions[index], [delay, delay]).then(then);
 
-const getTimers = (actions: Action[], then: () => Promise<void>, delayRange: Range) => {
+const getTimers = (actions: Action[], then: () => void, delayRange: Range) => {
   const delays = getDelays(actions, delayRange);
   delays.forEach(startTimers(actions, then));
 };
