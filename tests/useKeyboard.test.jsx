@@ -2,16 +2,11 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import PropTypes from 'prop-types';
-import useKeyboard, { backspace, type } from '../src/useKeyboard';
+import useKeyboard, { backspace, type } from '../src/useKeyboard.ts';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 const HookWrapper = ({ hook }) => <div hook={hook()} />;
-
-HookWrapper.propTypes = {
-  hook: PropTypes.func.isRequired,
-};
 
 const getProps = wrapper => wrapper.find('div').props();
 describe('useKeyboard hook', () => {
@@ -19,7 +14,7 @@ describe('useKeyboard hook', () => {
     const wrapper = shallow(<HookWrapper hook={useKeyboard} />);
 
     const {
-      hook: [text],
+      hook: {text},
     } = getProps(wrapper);
 
     expect(text).toBe('');
@@ -31,13 +26,13 @@ describe('useKeyboard hook', () => {
 
     const textTest = 'Test';
     const {
-      hook: [, setText],
+      hook: {setText},
     } = getProps(wrapper);
 
     setText(textTest);
 
     const {
-      hook: [text],
+      hook: {text},
     } = getProps(wrapper);
 
     await act(async () => {
@@ -45,14 +40,14 @@ describe('useKeyboard hook', () => {
     });
 
     const {
-      hook: [, , clearText],
+      hook: {clearText},
     } = getProps(wrapper);
 
     clearText();
 
     await act(async () => {
       const {
-        hook: [delayedText],
+        hook: {text: delayedText},
       } = getProps(wrapper);
 
       setTimeout(() => expect(delayedText).toBe(''), 2000);
