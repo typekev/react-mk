@@ -1,8 +1,8 @@
 import React, {PropsWithChildren, DetailedHTMLProps} from 'react';
 
 interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
-  blink: boolean;
-  blinkAnimationDuration: number,
+  blink?: boolean;
+  blinkAnimationDuration?: number,
 }
 
 export default function Cursor({ blink = true, blinkAnimationDuration = 700, children = '|', ...rest }: PropsWithChildren<Props>) {
