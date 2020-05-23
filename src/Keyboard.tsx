@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Action, Range } from '../types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
@@ -18,7 +18,7 @@ export default function Keyboard({
   children,
   sentenceDelayPerCharRange = defaultSentenceDelay,
   keyPressDelayRange = defaultKeyPressDelay,
-}: Props) {
+}: Props): JSX.Element {
   const { text, setText, clearText } = useKeyboard();
   const [remainingActions, setRemainingActions] = useState(initialState);
   const [previousAction, setPreviousAction] = useState('');
@@ -45,13 +45,12 @@ export default function Keyboard({
           clearText(newAction).then((action: Action) => {
             setText(action, keyPressDelayRange).then(() =>
               setRemainingActions(newRemainingActions),
-            )
-          },
-          ),
+            );
+          }),
       );
       setPreviousAction(newAction);
     }
   }, [remainingActions]);
 
-  return text;
+  return <>{text}</>;
 }

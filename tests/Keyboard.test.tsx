@@ -7,6 +7,10 @@ import Keyboard, { type as typeFunction } from '../src/Keyboard';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Keyboard component', () => {
+  const setState = jest.fn<void, string[]>();
+  beforeEach(() => {
+    jest.spyOn<any, string>(React, 'useState').mockImplementation((init) => [init, setState]);
+  });
   it('renders a child with the value Test', async () => {
     let wrapper;
     const text = 'Test';
@@ -36,9 +40,6 @@ describe('Keyboard component', () => {
 
   it('renders a child with the value Test', async () => {
     let wrapper;
-    const setState = jest.fn();
-    const useStateSpy = jest.spyOn(React, 'useState');
-    useStateSpy.mockImplementation(init => [init, setState]);
 
     const text = 'Test';
 
@@ -55,9 +56,7 @@ describe('Keyboard component', () => {
 
   it('renders a an empty string', async () => {
     let wrapper;
-    const setState = jest.fn();
-    const useStateSpy = jest.spyOn(React, 'useState');
-    useStateSpy.mockImplementation(init => [init, setState]);
+    const setState = jest.fn<void, string[]>();
 
     const text = '';
 
