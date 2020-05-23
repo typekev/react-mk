@@ -3,6 +3,7 @@
   "version": "1.0.9",
   "description": "A simple, light weight (5kB), and declarative React component for displaying typing animations, painlessly.",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     "./": "./lib/"
   },
@@ -72,6 +73,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
