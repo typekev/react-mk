@@ -2,19 +2,30 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import useKeyboard, { backspace, type } from '../src/useKeyboard.ts';
+import { Action, Range } from '../types';
+import useKeyboard, { backspace, type } from '../src/useKeyboard';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const HookWrapper = ({ hook }) => <div hook={hook()} />;
+interface HookReturn {
+  text: string;
+  setText: (action: Action, keyPressDelayRange: Range) => Promise<unknown>;
+  clearText: (action: Action) => Promise<Action>;
+}
 
-const getProps = wrapper => wrapper.find('div').props();
+const Div = (_params: { hook: HookReturn }) => <div />;
+
+const HookWrapper = ({ hook }: { hook: () => HookReturn }) => (
+  <Div key="hookWrapper" hook={hook()} />
+);
+
+const getProps = (wrapper) => wrapper.findWhere((node) => node.key() === 'hookWrapper').props();
 describe('useKeyboard hook', () => {
   it('should return an empty string by default', () => {
     const wrapper = shallow(<HookWrapper hook={useKeyboard} />);
 
     const {
-      hook: {text},
+      hook: { text },
     } = getProps(wrapper);
 
     expect(text).toBe('');
@@ -26,13 +37,13 @@ describe('useKeyboard hook', () => {
 
     const textTest = 'Test';
     const {
-      hook: {setText},
+      hook: { setText },
     } = getProps(wrapper);
 
     setText(textTest);
 
     const {
-      hook: {text},
+      hook: { text },
     } = getProps(wrapper);
 
     await act(async () => {
@@ -40,14 +51,14 @@ describe('useKeyboard hook', () => {
     });
 
     const {
-      hook: {clearText},
+      hook: { clearText },
     } = getProps(wrapper);
 
     clearText();
 
     await act(async () => {
       const {
-        hook: {text: delayedText},
+        hook: { text: delayedText },
       } = getProps(wrapper);
 
       setTimeout(() => expect(delayedText).toBe(''), 2000);
