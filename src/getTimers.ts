@@ -9,13 +9,13 @@ export const accumulateDelays = (
   accumulatedDelays: number[],
   action: Action,
   index: number,
-  delayRange: Range,
+  delayRange?: Range,
 ) => [
     ...accumulatedDelays,
     getDelay(action, delayRange) + getPreviousDelay(accumulatedDelays, index),
   ];
 
-export const getDelays = (actions: Action[], delayRange: Range) =>
+export const getDelays = (actions: Action[], delayRange?: Range) =>
   actions.reduce(
     (accumulatedDelays: number[], action, index) =>
       accumulateDelays(accumulatedDelays, action, index, delayRange),
@@ -27,7 +27,7 @@ export const startTimers = (actions: Action[], then: () => void) => (
   index: number,
 ) => getTimer(actions[index], [delay, delay]).then(then);
 
-const getTimers = (actions: Action[], then: () => void, delayRange: Range) => {
+const getTimers = (actions: Action[], then: () => void, delayRange?: Range) => {
   const delays = getDelays(actions, delayRange);
   delays.forEach(startTimers(actions, then));
 };
