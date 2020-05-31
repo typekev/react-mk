@@ -16,7 +16,6 @@
       {
         "code": 100
       }
-    ],
-    "react-hooks/rules-of-hooks": "error"
+    ]
   }
 }
