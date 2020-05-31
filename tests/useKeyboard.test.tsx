@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Action, Range } from '../types';
 import useKeyboard, { backspace, type } from '../src/useKeyboard';
 
-Enzyme.configure({ adapter: Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
 interface HookReturn {
   text: string;
