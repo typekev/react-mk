@@ -23,17 +23,12 @@ export default function Keyboard({
   const [remainingActions, setRemainingActions] = useState(initialState);
   const [previousAction, setPreviousAction] = useState('');
 
-  useEffect(
-    /* istanbul ignore next */
-    () => {
-      if (remainingActions.length === initialState.length) {
-        setRemainingActions(
-          typeof children === 'function' ? children({ type }) : [children.toString()],
-        );
-      }
-    },
-    [children],
-  );
+  useEffect(() => {
+    remainingActions.length === initialState.length &&
+      setRemainingActions(
+        typeof children === 'function' ? children({ type }) : [children.toString()],
+      );
+  }, [children]);
 
   useEffect(() => {
     if (remainingActions.length > initialState.length) {
