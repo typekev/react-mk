@@ -22,16 +22,17 @@ export default function Keyboard({
   const { text, setText, clearText } = useKeyboard();
   const [remainingActions, setRemainingActions] = useState(initialState);
   const [previousAction, setPreviousAction] = useState('');
+  const hasRemainingActions = remainingActions.length > 0;
 
   useEffect(() => {
-    remainingActions.length === initialState.length &&
+    !hasRemainingActions &&
       setRemainingActions(
         typeof children === 'function' ? children({ type }) : [children.toString()],
       );
   }, [children]);
 
   useEffect(() => {
-    if (remainingActions.length > initialState.length) {
+    if (hasRemainingActions) {
       const [newAction, ...newRemainingActions] = remainingActions;
 
       getTimer(previousAction, sentenceDelayPerCharRange).then(
