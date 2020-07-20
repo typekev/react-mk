@@ -1,4 +1,4 @@
-import { Action, Range } from "../types";
+import { Action, Range } from "./types";
 import getDelay from "./getDelay";
 
 interface Props { action: Action, timer: NodeJS.Timeout }

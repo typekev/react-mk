@@ -1,4 +1,4 @@
-import { Action } from '../types';
+import { Action } from './types';
 import getKeyPressDelay from './getKeyPressDelay';
 import { defaultKeyPressDelay } from './constants';
 

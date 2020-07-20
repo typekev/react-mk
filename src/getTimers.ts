@@ -1,4 +1,4 @@
-import { Action, Range } from "../types";
+import { Action, Range } from "./types";
 import getTimer from './getTimer';
 import getDelay from './getDelay';
 

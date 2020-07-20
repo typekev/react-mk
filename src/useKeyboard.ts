@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
-import { Action, Range } from '../types';
+import { Action, Range } from './types';
 import getTimers from './getTimers';
 import getTimer from './getTimer';
 import { defaultKeyPressDelay } from './constants';

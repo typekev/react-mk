@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Action, Range } from '../types';
+import { Action, Range } from './types';
 import getTimer from './getTimer';
 import useKeyboard from './useKeyboard';
 import { defaultKeyPressDelay, defaultSentenceDelay } from './constants';
