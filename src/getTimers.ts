@@ -2,8 +2,7 @@ import { Action, Range } from "../types";
 import getTimer from './getTimer';
 import getDelay from './getDelay';
 
-export const getPreviousDelay = (delays: number[], index: number) =>
-  index === 0 ? 0 : delays[index - 1];
+export const getPreviousDelay = (delays: number[], index: number) => index && delays[index - 1];
 
 export const accumulateDelays = (
   accumulatedDelays: number[],
@@ -16,8 +15,8 @@ export const accumulateDelays = (
   ];
 
 export const getDelays = (actions: Action[], delayRange?: Range) =>
-  actions.reduce(
-    (accumulatedDelays: number[], action, index) =>
+  actions.reduce<number[]>(
+    (accumulatedDelays, action, index) =>
       accumulateDelays(accumulatedDelays, action, index, delayRange),
     [],
   );
