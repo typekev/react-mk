@@ -1,4 +1,6 @@
-# [React Mechanical Keyboard](https://github.com/typekev/react-mk) ⌨️ [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/typekev/react-mk/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/react-mk)](https://www.npmjs.com/package/react-mk) [![Build Status](https://travis-ci.com/typekev/react-mk.svg?branch=master)](https://travis-ci.com/typekev/react-mk) [![Coverage Status](https://coveralls.io/repos/github/typekev/react-mk/badge.svg?branch=master)](https://coveralls.io/github/typekev/react-mk?branch=master)
+<h1 style="text-align: center;" href="https://github.com/typekev/react-mk">React Mechanical Keyboard ⌨️</h1>
+
+<p style="text-align: center;"><a href="https://github.com/typekev/react-mk/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a> <a href="https://www.npmjs.com/package/react-mk"><img src="https://img.shields.io/npm/v/react-mk" alt="npm"></a> <a href="https://travis-ci.com/typekev/react-mk"><img src="https://travis-ci.com/typekev/react-mk.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/typekev/react-mk?branch=master"><img src="https://coveralls.io/repos/github/typekev/react-mk/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/typekev/react-mk"><img src="http://inch-ci.org/github/typekev/react-mk.svg?branch=master" alt="Inline docs"></a> <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="code style: prettier"></a> <a href="https://github.com/typekev/react-mk/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a></p>
 
 > A simple, light weight (7kB), and declarative React component for displaying typing animations, painlessly.
 
@@ -8,11 +10,11 @@
 npm i react-mk --save
 ```
 
-No need to import pesky css files, `react-mk` works out of the box.
+No need to import pesky CSS files, `react-mk` works right out of the box.
 
 ## Example
 
-View example at [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
+Test it out on [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 
 ## Instructions
 
@@ -34,52 +36,44 @@ View example at [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 
 ## Usage
 
-```js
+```jsx
 import React from 'react';
-import Keyboard, { Cursor } from 'components/react-mk';
+import Keyboard, { Cursor } from 'react-mk';
 
-function TypingComponent() {
-  return (
-    <>
-      <Keyboard sentenceDelayPerCharRange={[0, 0]}>You can write whatever you like here</Keyboard>
-      <Cursor />
-      <br />
-      <Keyboard keyPressDelayRange={[200, 400]}>
-        {({ type }) =>
-          type(
-            1000,
-            'You can even type super slowly using the keyPressDelayRange prop',
-            300,
-            'Set the blink property of Cursor to false to disable the blinking animation --> ',
-          )
-        }
-      </Keyboard>
-      <Cursor blink={false} />
-      <br />
-      <Keyboard sentenceDelayPerCharRange={[0, 0]} keyPressDelayRange={[50, 70]}>
-        {({ type }) =>
-          type(3000, 'Multiple instances of Keyboard can easily be rendered at the same time')
-        }
-      </Keyboard>
-      <Cursor>#</Cursor>
-      <br />
-      <Keyboard sentenceDelayPerCharRange={[300, 400]}>
-        {({ type }) =>
-          type(
-            4000,
-            "Use the sentenceDelayPerCharRange prop to adjust the amount of time that your sentences should be visible (It'll be a while before the next sentance appears)",
-            'You can also pass a number to the `type` function to dictate the time between deleting the previous sentance and writting the next sentence',
-          )
-        }
-      </Keyboard>
-      <Cursor blinkAnimationDuration={200}>[]</Cursor>
-    </>
-  );
-}
+const TypingComponent = () => (
+  <>
+    <Keyboard sentenceDelayPerCharRange={[0, 0]}>You can write whatever you like here</Keyboard>
+    <Cursor />
+    <br />
+    <Keyboard keyPressDelayRange={[200, 400]}>
+      {({ type }) =>
+        type(
+          1000,
+          'You can even type super slowly using the keyPressDelayRange prop',
+          300,
+          'Set the blink property of Cursor to false to disable the blinking animation --> ',
+        )
+      }
+    </Keyboard>
+    <Cursor blink={false} />
+    <br />
+    <Keyboard sentenceDelayPerCharRange={[0, 0]} keyPressDelayRange={[50, 70]}>
+      {({ type }) =>
+        type(3000, 'Multiple instances of Keyboard can easily be rendered at the same time')
+      }
+    </Keyboard>
+    <Cursor>#</Cursor>
+    <br />
+    <Keyboard sentenceDelayPerCharRange={[300, 400]}>
+      {({ type }) =>
+        type(
+          4000,
+          "Use the sentenceDelayPerCharRange prop to adjust the amount of time that your sentences should be visible (It'll be a while before the next sentance appears)",
+          'You can also pass a number to the `type` function to dictate the time between deleting the previous sentance and writting the next sentence',
+        )
+      }
+    </Keyboard>
+    <Cursor blinkAnimationDuration={200}>[]</Cursor>
+  </>
+);
 ```
-
-# TODO &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/typekev/react-mk/pulls) [![Inline docs](http://inch-ci.org/github/typekev/react-mk.svg?branch=master)](http://inch-ci.org/github/typekev/react-mk) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-
-- Improve test coverage and quality
-- Improve documentation
-- Consider allowing typing of non-strings
