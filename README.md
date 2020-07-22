@@ -36,7 +36,7 @@ Test it out on [codesandbox](https://codesandbox.io/embed/react-mk-u6851)
 
 ## Usage
 
-```jsx
+```tsx
 import React from 'react';
 import Keyboard, { Cursor } from 'react-mk';
 
