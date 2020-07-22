@@ -68,8 +68,8 @@ const TypingComponent = () => (
       {({ type }) =>
         type(
           4000,
-          "Use the sentenceDelayPerCharRange prop to adjust the amount of time that your sentences should be visible (It'll be a while before the next sentance appears)",
-          'You can also pass a number to the `type` function to dictate the time between deleting the previous sentance and writting the next sentence',
+          "Use the sentenceDelayPerCharRange prop to adjust the amount of time that your sentences should be visible (It'll be a while before the next sentence appears)",
+          'You can also pass a number to the `type` function to dictate the time between deleting the previous sentence and writing the next sentence',
         )
       }
     </Keyboard>
