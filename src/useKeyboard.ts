@@ -18,7 +18,7 @@ export const type = (
 const useKeyboard = () => {
   const [chars, setChars] = useState<string[]>(initialState);
   const [remainingChars, setRemainingChars] = useState<string[]>(initialState);
-  const [resolver, setResolver] = useState<(() => void) | undefined>(undefined);
+  const [resolver, setResolver] = useState<(() => void) | undefined>();
   const [delayRange, setDelayRange] = useState(defaultKeyPressDelay);
   const charsRef = useRef(chars);
 
@@ -39,7 +39,7 @@ const useKeyboard = () => {
   }, [remainingChars]);
 
   const setText = (action: Action, keyPressDelayRange: Range) =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       setResolver(() => resolve);
       setDelayRange(keyPressDelayRange);
       setChars(initialState);
@@ -57,15 +57,15 @@ const useKeyboard = () => {
       !chars.length
         ? resolve(action)
         : getTimers(
-            charsRef.current,
-            () => {
-              /* istanbul ignore next */
-              backspace(charsRef.current, setChars);
-              /* istanbul ignore next */
-              return charsRef.current.length === 0 && resolve(action);
-            },
-            delayRange,
-          ),
+          charsRef.current,
+          () => {
+            /* istanbul ignore next */
+            backspace(charsRef.current, setChars);
+            /* istanbul ignore next */
+            return charsRef.current.length === 0 && resolve(action);
+          },
+          delayRange,
+        ),
     );
 
   const text = chars.join('');

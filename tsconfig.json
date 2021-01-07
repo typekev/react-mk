@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "react",
+    "target": "ES2015",
+    "module": "CommonJS",
+    "jsx": "react-jsx",
     "removeComments": true,
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }
