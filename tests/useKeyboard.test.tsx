@@ -1,8 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { Action, Range } from '../types';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { Action, Range } from '../src/types';
 import useKeyboard, { backspace, type } from '../src/useKeyboard';
 
 Enzyme.configure({ adapter: new Adapter() });

@@ -9,7 +9,7 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb-typescript", "prettier", "prettier/react"],
   "rules": {
     "max-len": [
       "error",

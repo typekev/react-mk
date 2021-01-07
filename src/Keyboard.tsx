@@ -9,7 +9,7 @@ const initialState: string[] = [];
 export const type = (...actions: Action[]) => [...actions];
 
 interface Props {
-  children: string | number | (({ type }: { type: (...arg: Action[]) => Action[] }) => any);
+  children: string | number | ((params: { type: (...arg: Action[]) => Action[] }) => any);
   keyPressDelayRange?: Range;
   sentenceDelayPerCharRange?: Range;
 }

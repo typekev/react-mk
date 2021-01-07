@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, DetailedHTMLProps } from 'react';
-import { css, keyframes } from 'emotion';
+import { css, keyframes } from '@emotion/css';
 
 const blinkAnimation = keyframes`
   from {

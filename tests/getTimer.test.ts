@@ -1,4 +1,5 @@
 import getTimer, { clearTimer, createTimer, getTimeout } from '../src/getTimer';
+import { Range } from '../src/types'
 
 describe('getTimer function', () => {
   it('should not throw an error when passed a string', () => {
@@ -12,24 +13,25 @@ describe('getTimer function', () => {
 
   it('should return Test', () => {
     const text = 'Test';
-    expect(clearTimer({ action: text, timer: setTimeout(() => {}, 100) })).toBe(text);
+    expect(clearTimer({ action: text, timer: setTimeout(() => { }, 100) })).toBe(text);
   });
 
-  it('should return a timer, a delay of 400, and a resolve function', () => {
+  it('should return a timer, a delay of 400', () => {
     const text = 'Test';
-    const delayRange = [100, 100];
+    const delayRange: Range = [100, 100];
 
-    const { timer } = createTimer(() => {})(text, delayRange);
+    const { timer, delay } = createTimer(text, delayRange)(() => Promise.resolve());
 
-    expect(typeof timer).toBe(typeof setTimeout(() => {}, delayRange[0]));
+    expect(typeof timer).toBe(typeof setTimeout(() => Promise.resolve(), delay));
+    expect(delay).toBe(delayRange[0] * text.length);
   });
 
   it('should return a timer', () => {
     const text = 'Test';
     const delay = 100;
 
-    const timer = getTimeout(() => {}, text, delay);
+    const timer = getTimeout(() => { }, text, delay);
 
-    expect(typeof timer).toBe(typeof setTimeout(() => {}, delay));
+    expect(typeof timer).toBe(typeof setTimeout(() => Promise.resolve(), delay));
   });
 });
