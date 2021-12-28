@@ -2,7 +2,7 @@
 
 <p align="center""><a href="https://github.com/typekev/react-mk/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a> <a href="https://www.npmjs.com/package/react-mk"><img src="https://img.shields.io/npm/v/react-mk" alt="npm"></a> <a href="https://travis-ci.com/typekev/react-mk"><img src="https://travis-ci.com/typekev/react-mk.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/typekev/react-mk?branch=master"><img src="https://coveralls.io/repos/github/typekev/react-mk/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/typekev/react-mk"><img src="http://inch-ci.org/github/typekev/react-mk.svg?branch=master" alt="Inline docs"></a> <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="code style: prettier"></a> <a href="https://github.com/typekev/react-mk/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a></p>
 
-> A simple, light weight (7kB), and declarative React component for displaying typing animations, painlessly.
+> A light weight React component for emulating typing animations.
 
 ## Install
 

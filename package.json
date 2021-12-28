@@ -1,7 +1,7 @@
 {
   "name": "react-mk",
   "version": "1.1.5",
-  "description": "A simple, typed, light weight (7kB), and declarative React component for displaying typing animations, painlessly.",
+  "description": "A light weight React component for emulating keyboard typing.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
