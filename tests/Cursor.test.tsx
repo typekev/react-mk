@@ -1,23 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, screen, cleanup } from '@testing-library/react';
 import Cursor from '../src/Cursor';
+import { describe, it, afterEach, expect } from 'vitest';
 
 describe('Cursor component', () => {
+  afterEach(() => {
+    cleanup(); // This will clean up the DOM after each test
+  });
+
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Cursor />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    render(<Cursor />);
+    const cursorElement = screen.getByText('|');
+    expect(cursorElement).toBeTruthy();
   });
 
   it('renders with blink disabled without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Cursor blink={false} />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    render(<Cursor blink={false} />);
+    const cursorElement = screen.getByText('|');
+    expect(cursorElement).toBeTruthy();
   });
 
   it('renders a child without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Cursor>Test</Cursor>, div);
-    ReactDOM.unmountComponentAtNode(div);
+    render(<Cursor>Test</Cursor>);
+    const cursorElement = screen.getByText('Test');
+    expect(cursorElement).toBeTruthy();
   });
 });

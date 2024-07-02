@@ -1,88 +1,56 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { Action, Range } from '../src/types';
+import { render, waitFor } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+
 import useKeyboard, { backspace, type } from '../src/useKeyboard';
 
-Enzyme.configure({ adapter: new Adapter() });
-
-interface HookReturn {
-  text: string;
-  setText: (action: Action, keyPressDelayRange: Range) => Promise<unknown>;
-  clearText: (action: Action) => Promise<Action>;
-}
-
-const Div = (_params: { hook: HookReturn }) => <div />;
-
-const HookWrapper = ({ hook }: { hook: () => HookReturn }) => (
-  <Div key="hookWrapper" hook={hook()} />
-);
-
-const getProps = (wrapper) => wrapper.findWhere((node) => node.key() === 'hookWrapper').props();
 describe('useKeyboard hook', () => {
   it('should return an empty string by default', () => {
-    const wrapper = shallow(<HookWrapper hook={useKeyboard} />);
+    const TestComponent = () => {
+      const { text } = useKeyboard();
+      expect(text).toBe('');
+      return null;
+    };
 
-    const {
-      hook: { text },
-    } = getProps(wrapper);
-
-    expect(text).toBe('');
-    wrapper.unmount();
+    render(<TestComponent />);
   });
 
-  it('should set text to Test then clear it', async () => {
-    const wrapper = shallow(<HookWrapper hook={useKeyboard} />);
+  it('should set text to "Test" then clear it', async () => {
+    const TestComponent = () => {
+      const { text, setText } = useKeyboard();
 
-    const textTest = 'Test';
-    const {
-      hook: { setText },
-    } = getProps(wrapper);
+      return (
+        <>
+          <button data-testid="set" onClick={() => setText('Test', [0, 0])} />
+          <button data-testid="clear" onClick={() => setText('', [0, 0])} />
+          <p data-testid="p">{text}</p>
+        </>
+      );
+    };
 
-    setText(textTest);
+    const { getByTestId } = render(<TestComponent />);
 
-    const {
-      hook: { text },
-    } = getProps(wrapper);
+    const p = getByTestId('p');
+    getByTestId('set').click();
+    await waitFor(async () => expect(p.textContent).toBe('Test'));
 
-    await act(async () => {
-      setTimeout(() => expect(text).toBe(textTest), 2000);
-    });
-
-    const {
-      hook: { clearText },
-    } = getProps(wrapper);
-
-    clearText();
-
-    await act(async () => {
-      const {
-        hook: { text: delayedText },
-      } = getProps(wrapper);
-
-      setTimeout(() => expect(delayedText).toBe(''), 2000);
-    });
-
-    wrapper.unmount();
+    getByTestId('clear').click();
+    await waitFor(async () => expect(p.textContent).toBe(''));
   });
 
-  it('returns undefined and does not throw when chars is greater than 1', () => {
+  it('backspace function returns undefined and does not throw when chars is greater than 1', () => {
     const chars = ['a', 'b', 'c'];
-    expect(typeof backspace(chars, () => {})).toBe('undefined');
-    expect(() => backspace(chars, () => {})).not.toThrow();
+    expect(backspace(chars, () => {})).toBe(undefined);
   });
 
-  it('returns undefined and does not throw when chars is empty', () => {
+  it('backspace function returns undefined and does not throw when chars is empty', () => {
     const chars = [];
-    expect(typeof backspace(chars, () => {})).toBe('undefined');
-    expect(() => backspace(chars, () => {})).not.toThrow();
+    expect(backspace(chars, () => {})).toBe(undefined);
   });
 
-  it('returns undefined and does not throw', () => {
+  it('type function returns undefined and does not throw', () => {
     const chars = ['a', 'b', 'c'];
     const char = 'd';
-    expect(typeof type(chars, char, () => {})).toBe('undefined');
-    expect(() => type(chars, char, () => {})).not.toThrow();
+    expect(type(chars, char, () => {})).toBe(undefined);
   });
 });

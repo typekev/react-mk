@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import getKeyPressDelay from '../src/getKeyPressDelay';
 
 describe('getKeyPressDelay function', () => {

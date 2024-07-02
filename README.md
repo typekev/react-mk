@@ -58,9 +58,7 @@ const TypingComponent = () => (
     <Cursor blink={false} />
     <br />
     <Keyboard sentenceDelayPerCharRange={[0, 0]} keyPressDelayRange={[50, 70]}>
-      {({ type }) =>
-        type(3000, 'Multiple instances of Keyboard can easily be rendered at the same time')
-      }
+      {({ type }) => type(3000, 'Multiple instances of Keyboard can easily be rendered at the same time')}
     </Keyboard>
     <Cursor>#</Cursor>
     <br />
