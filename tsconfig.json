@@ -2,7 +2,6 @@
   "compilerOptions": {
     "outDir": "lib",
     "lib": ["es2015", "DOM"],
-    "types": ["node"],
     "target": "ES5",
     "module": "CommonJS",
     "jsx": "react",
