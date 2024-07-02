@@ -3,16 +3,16 @@ import getDelay from './getDelay';
 
 interface Props {
   action: Action;
-  timer: NodeJS.Timeout;
+  timer: number;
 }
 
 export const clearTimer = ({ action, timer }: Props) => {
-  clearTimeout(timer);
+  window.clearTimeout(timer);
   return action;
 };
 
 export const getTimeout = (resolve: (params: Props) => void, action: Action, delay: number) => {
-  const timer: NodeJS.Timeout = setTimeout(() => resolve({ action, timer }), delay);
+  const timer = window.setTimeout(() => resolve({ action, timer }), delay);
   return timer;
 };
 

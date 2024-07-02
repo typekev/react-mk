@@ -14,7 +14,7 @@ describe('getTimer function', () => {
 
   it('should return "Test"', () => {
     const text = 'Test';
-    expect(clearTimer({ action: text, timer: setTimeout(() => {}, 100) })).toBe(text);
+    expect(clearTimer({ action: text, timer: window.setTimeout(() => {}, 100) })).toBe(text);
   });
 
   it('should return a timer and delay of 400', () => {
