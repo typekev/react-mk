@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "lib",
+    "lib": ["es2015"],
     "target": "ES5",
     "module": "CommonJS",
     "jsx": "react",
