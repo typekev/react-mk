@@ -7,13 +7,10 @@ import { defaultKeyPressDelay } from './constants';
 const initialState: string[] = [];
 
 export const backspace = (chars: string[], setChars: Dispatch<SetStateAction<string[]>>) =>
-  setChars(chars.length > 1 ? chars.slice(0, chars.length - 1) : initialState);
+  setChars(chars.length > 1 ? chars.slice(0, -1) : initialState);
 
-export const type = (
-  chars: string[],
-  nextChar: string,
-  setChars: Dispatch<SetStateAction<string[]>>,
-) => setChars([...chars, nextChar]);
+export const type = (chars: string[], nextChar: string, setChars: Dispatch<SetStateAction<string[]>>) =>
+  setChars((prevChars) => [...prevChars, nextChar]);
 
 const useKeyboard = () => {
   const [chars, setChars] = useState<string[]>(initialState);
@@ -22,13 +19,14 @@ const useKeyboard = () => {
   const [delayRange, setDelayRange] = useState(defaultKeyPressDelay);
   const charsRef = useRef(chars);
 
-  charsRef.current = chars;
+  useEffect(() => {
+    charsRef.current = chars;
+  }, [chars]);
 
   useEffect(() => {
-    /* istanbul ignore next */
-    if (remainingChars.length > initialState.length) {
+    if (remainingChars.length > 0) {
       const [nextChar, ...newRemainingChars] = remainingChars;
-      const doType = () => type(chars, nextChar, setChars);
+      const doType = () => type(charsRef.current, nextChar, setChars);
       const doSetRemainingChars = () => setRemainingChars(newRemainingChars);
       getTimer(nextChar, delayRange).then(doType).then(doSetRemainingChars);
     } else if (resolver) {
@@ -36,14 +34,13 @@ const useKeyboard = () => {
       setResolver(undefined);
       setRemainingChars(initialState);
     }
-  }, [remainingChars]);
+  }, [remainingChars, delayRange, resolver]);
 
   const setText = (action: Action, keyPressDelayRange: Range) =>
     new Promise<void>((resolve) => {
       setResolver(() => resolve);
       setDelayRange(keyPressDelayRange);
       setChars(initialState);
-      /* istanbul ignore else */
       if (typeof action === 'string' && action.length > 0) {
         setRemainingChars(action.split(''));
       } else {
@@ -51,22 +48,21 @@ const useKeyboard = () => {
       }
     });
 
-  const clearText = (action: Action) =>
-    new Promise<Action>((resolve) =>
-      /* istanbul ignore next */
-      !chars.length
-        ? resolve(action)
-        : getTimers(
+  const clearText = (action: Action = '') =>
+    new Promise<Action>((resolve) => {
+      if (charsRef.current.length === 0) {
+        resolve(action);
+      } else {
+        getTimers(
           charsRef.current,
           () => {
-            /* istanbul ignore next */
             backspace(charsRef.current, setChars);
-            /* istanbul ignore next */
-            return charsRef.current.length === 0 && resolve(action);
+            if (charsRef.current.length === 0) resolve(action);
           },
           delayRange,
-        ),
-    );
+        );
+      }
+    });
 
   const text = chars.join('');
 

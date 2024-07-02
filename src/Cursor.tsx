@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, DetailedHTMLProps } from 'react';
+import React from 'react';
 import { css, keyframes } from '@emotion/css';
 
 const blinkAnimation = keyframes`
@@ -13,17 +13,12 @@ const blinkAnimation = keyframes`
   }
 `;
 
-interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
+interface Props extends React.HTMLAttributes<HTMLSpanElement> {
   blink?: boolean;
   blinkAnimationDuration?: number;
 }
 
-export default function Cursor({
-  blink = true,
-  blinkAnimationDuration = 700,
-  children = '|',
-  ...rest
-}: PropsWithChildren<Props>) {
+export default function Cursor({ blink = true, blinkAnimationDuration = 700, children = '|', ...rest }: Props) {
   return (
     <span
       {...rest}

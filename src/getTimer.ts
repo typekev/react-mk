@@ -1,7 +1,10 @@
-import { Action, Range } from "./types";
-import getDelay from "./getDelay";
+import { Action, Range } from './types';
+import getDelay from './getDelay';
 
-interface Props { action: Action, timer: NodeJS.Timeout }
+interface Props {
+  action: Action;
+  timer: NodeJS.Timeout;
+}
 
 export const clearTimer = ({ action, timer }: Props) => {
   clearTimeout(timer);
@@ -9,10 +12,7 @@ export const clearTimer = ({ action, timer }: Props) => {
 };
 
 export const getTimeout = (resolve: (params: Props) => void, action: Action, delay: number) => {
-  const timer: NodeJS.Timeout = setTimeout(
-    () => resolve({ action, timer }),
-    delay
-  );
+  const timer: NodeJS.Timeout = setTimeout(() => resolve({ action, timer }), delay);
   return timer;
 };
 
