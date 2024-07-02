@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^14.12.3",
+    "@testing-library/dom": "^10.3.0",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.3.3",
     "@typescript-eslint/parser": "^7.15.0",
