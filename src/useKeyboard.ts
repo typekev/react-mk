@@ -34,7 +34,7 @@ const useKeyboard = () => {
       setResolver(undefined);
       setRemainingChars(initialState);
     }
-  }, [remainingChars, delayRange, resolver]);
+  }, [remainingChars]);
 
   const setText = (action: Action, keyPressDelayRange: Range) =>
     new Promise<void>((resolve) => {

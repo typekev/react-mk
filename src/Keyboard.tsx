@@ -24,9 +24,11 @@ export default function Keyboard({
 
   useEffect(() => {
     if (!hasRemainingActions) {
-      setRemainingActions(typeof children === 'function' ? children({ type }) : [children.toString()]);
+      setText('', keyPressDelayRange).then(() =>
+        setRemainingActions(typeof children === 'function' ? children({ type }) : [children.toString()]),
+      );
     }
-  }, [children, hasRemainingActions]);
+  }, [children]);
 
   useEffect(() => {
     if (hasRemainingActions) {
@@ -40,15 +42,7 @@ export default function Keyboard({
       });
       setPreviousAction(newAction);
     }
-  }, [
-    remainingActions,
-    sentenceDelayPerCharRange,
-    keyPressDelayRange,
-    previousAction,
-    clearText,
-    setText,
-    hasRemainingActions,
-  ]);
+  }, [remainingActions]);
 
   return <>{text}</>;
 }
