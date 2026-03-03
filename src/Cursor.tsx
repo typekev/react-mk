@@ -1,34 +1,36 @@
-import React from 'react';
-import { css, keyframes } from '@emotion/css';
+import { useEffect } from 'react';
+import type { CursorProps } from './types';
+import { DEFAULT_BLINK_SPEED } from './constants';
 
-const blinkAnimation = keyframes`
-  from {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+const STYLE_ID = 'react-mk-cursor';
+const STYLES = [
+  '@keyframes react-mk-blink{0%,100%{opacity:1}50%{opacity:0}}',
+  '@media(prefers-reduced-motion:reduce){[data-react-mk-cursor]{animation:none!important}}',
+].join('');
 
-interface Props extends React.HTMLAttributes<HTMLSpanElement> {
-  blink?: boolean;
-  blinkAnimationDuration?: number;
-}
+export default function Cursor({
+  blink = true,
+  blinkSpeed = DEFAULT_BLINK_SPEED,
+  children = '|',
+  style,
+  ...props
+}: CursorProps) {
+  useEffect(() => {
+    if (!blink || typeof document === 'undefined') return;
+    if (document.getElementById(STYLE_ID)) return;
 
-export default function Cursor({ blink = true, blinkAnimationDuration = 700, children = '|', ...rest }: Props) {
+    const el = document.createElement('style');
+    el.id = STYLE_ID;
+    el.textContent = STYLES;
+    document.head.appendChild(el);
+  }, [blink]);
+
   return (
     <span
-      {...rest}
-      className={css`
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
-        animation: ${blinkAnimation} ${blinkAnimationDuration}ms ${blink ? 'infinite' : 0};
-        transform-origin: center bottom;
-      `}
+      {...props}
+      aria-hidden
+      data-react-mk-cursor=""
+      style={{ ...style, ...(blink ? { animation: `react-mk-blink ${blinkSpeed}ms step-end infinite` } : undefined) }}
     >
       {children}
     </span>

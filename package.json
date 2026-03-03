@@ -1,16 +1,27 @@
 {
   "name": "react-mk",
-  "version": "1.1.6",
-  "description": "A light weight React component for emulating keyboard typing.",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "A lightweight, zero-dependency React typewriter component with realistic typing animations.",
   "main": "lib/index.js",
+  "module": "lib/index.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    }
+  },
+  "sideEffects": false,
   "files": [
     "lib"
   ],
   "scripts": {
     "test": "vitest",
+    "test:run": "vitest run",
     "coveralls": "vitest --coverage && cat ./coverage/lcov.info | coveralls",
-    "build": "tsc"
+    "clean": "rm -rf lib",
+    "build": "rm -rf lib && tsc"
   },
   "repository": {
     "type": "git",
@@ -18,47 +29,45 @@
   },
   "keywords": [
     "react",
-    "mechanical",
-    "keyboard",
-    "typist",
-    "type",
+    "typewriter",
     "typing",
     "animation",
     "animated",
-    "typewriter"
+    "keyboard",
+    "mechanical",
+    "typist",
+    "hook",
+    "cursor"
   ],
-  "author": "Kevin Gonzalez <kev@typekev.com>",
+  "author": "Kevin Gonzalez <kevin@keving.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/typekev/react-mk/issues"
   },
-  "dependencies": {
-    "@emotion/css": "^11.11.2"
-  },
   "peerDependencies": {
-    "react": ">=16.8"
+    "react": ">=18"
   },
   "devDependencies": {
-    "@happy-dom/global-registrator": "^14.12.3",
-    "@testing-library/dom": "^10.3.0",
-    "@testing-library/react": "^16.0.0",
-    "@types/react": "^18.3.3",
-    "@typescript-eslint/parser": "^7.15.0",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@happy-dom/global-registrator": "^20.8.3",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.14",
+    "@typescript-eslint/parser": "^8.56.1",
+    "@vitest/coverage-v8": "^4.0.18",
     "coveralls": "^3.1.1",
-    "eslint": "^9.6.0",
-    "eslint-plugin-react": "^7.34.3",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "husky": "^9.0.11",
-    "jsdom": "^24.1.0",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2",
+    "eslint": "^10.0.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
+    "lint-staged": "^16.3.1",
+    "prettier": "^3.8.1",
     "prettier-eslint-cli": "^8.0.1",
-    "react": ">=18.3",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.15.0",
-    "vitest": "^1.6.0"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vitest": "^4.0.18"
   }
 }
